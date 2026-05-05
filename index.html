@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FAF8F4">
 <title>Nate's Natty - Brand Kit for David</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,10 +34,12 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 108px;
     -webkit-text-size-adjust: 100%;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
     color-adjust: exact;
+    overflow-x: hidden;
   }
 
   @media print {
@@ -54,20 +57,27 @@
     background: var(--color-bg);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
   }
+
+  a { -webkit-tap-highlight-color: rgba(14, 124, 138, 0.08); }
 
   img { max-width: 100%; display: block; }
 
   .wrap {
     max-width: 760px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
   }
 
   .wrap-wide {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
   }
 
   /* ─── Top bar ─────────────────────────── */
@@ -84,10 +94,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 24px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: max(20px, env(safe-area-inset-left));
+    padding-right: max(20px, env(safe-area-inset-right));
     max-width: 1100px;
     margin: 0 auto;
+    gap: 12px;
   }
+  .doc-tag { white-space: nowrap; }
   .brand-mark {
     display: flex;
     align-items: center;
@@ -473,7 +488,7 @@
   .photo-do-dont {
     margin-top: 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 12px;
   }
   .pdd {
@@ -712,11 +727,18 @@
     background: var(--color-surface);
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 24px), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 14px, #000 calc(100% - 24px), transparent 100%);
   }
+  .toc::-webkit-scrollbar { display: none; }
   .toc-inner {
     display: flex;
-    gap: 22px;
-    padding: 12px 24px;
+    gap: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
     max-width: 1100px;
     margin: 0 auto;
     white-space: nowrap;
@@ -730,19 +752,41 @@
     color: var(--color-text-muted);
     text-decoration: none;
     transition: color 0.15s ease;
+    padding: 12px 10px;
+    border-radius: 6px;
   }
-  .toc a:hover { color: var(--color-accent); }
+  .toc a:hover, .toc a:active { color: var(--color-accent); }
+  .toc a:active { background: rgba(14, 124, 138, 0.08); }
   .toc a .n {
     color: var(--color-text-faded);
     margin-right: 4px;
   }
 
   /* ─── Desktop ────────────────────────── */
+  @media (max-width: 380px) {
+    h1.hero-title { font-size: 32px; }
+    h2.section-title { font-size: 26px; }
+    .doc-meta { font-size: 10px; gap: 10px; }
+    .brand-mark .wordmark { font-size: 16px; }
+    .doc-tag { font-size: 9px; }
+    .hero { padding-top: 40px; padding-bottom: 32px; }
+    section.block { padding-top: 48px; padding-bottom: 48px; }
+    .pillar-name, .flow-head, .trend-format { font-size: 18px; }
+    .val-name { font-size: 20px; }
+    .swatch-color { height: 56px; }
+  }
+
   @media (min-width: 720px) {
-    .wrap, .hero-inner { padding: 0 40px; }
-    .topbar-inner, .toc-inner { padding-left: 40px; padding-right: 40px; }
-    section.block { padding: 80px 40px; }
-    .hero { padding: 88px 40px 56px; }
+    .wrap, .hero-inner {
+      padding-left: max(40px, env(safe-area-inset-left));
+      padding-right: max(40px, env(safe-area-inset-right));
+    }
+    .topbar-inner, .toc-inner {
+      padding-left: max(40px, env(safe-area-inset-left));
+      padding-right: max(40px, env(safe-area-inset-right));
+    }
+    section.block { padding-top: 80px; padding-bottom: 80px; }
+    .hero { padding-top: 88px; padding-bottom: 56px; }
     h1.hero-title { font-size: 56px; }
     h2.section-title { font-size: 36px; }
     .hero-lead { font-size: 17px; }
@@ -752,6 +796,7 @@
     .ref-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
     .swatch-row { grid-template-columns: repeat(4, 1fr); }
     .type-row { grid-template-columns: 1fr 1fr 1fr; }
+    .photo-do-dont { grid-template-columns: 1fr 1fr; }
   }
 
   @media (min-width: 980px) {
